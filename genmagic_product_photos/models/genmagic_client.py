@@ -26,7 +26,7 @@ MAX_REDIRECTS = 3
 MODELS_TTL = 6 * 3600
 MODELS_RETRY_AFTER = 60
 # Hosts GenMagic serves generated files from. Files are only ever downloaded from these.
-MEDIA_HOSTS = ('genmagic.co', 'tlwdqzfibvgektzgdfqa.supabase.co')
+MEDIA_HOSTS = ('genmagic.co', 'axrsv1b9sa2ny4qv.public.blob.vercel-storage.com', 'tlwdqzfibvgektzgdfqa.supabase.co')
 
 KEY_HELP = "Get a key at genmagic.co/get-api-key."
 PRICING_TEXT = "genmagic.co/pricing"
