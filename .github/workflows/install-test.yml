@@ -1,0 +1,35 @@
+name: install-test
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  odoo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      db:
+        image: postgres:16
+        env:
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+          POSTGRES_DB: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U odoo" --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      IMAGE: odoo:19.0
+      DB: -e HOST=127.0.0.1 -e PORT=5432 -e USER=odoo -e PASSWORD=odoo
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: addons
+      - name: Install the module with its dependencies
+        run: |
+          docker run --rm --network host $DB -v "$PWD/addons:/mnt/extra-addons" $IMAGE \
+            odoo -d gmtest -i genmagic_product_photos --stop-after-init --without-demo=all --log-level=warn 2>&1 | tee install.log
+          if grep -E "ERROR|CRITICAL|Traceback" install.log; then exit 1; fi
+      - name: Use it as a merchant does, GenMagic mocked
+        run: |
+          docker run --rm -i --network host $DB -v "$PWD/addons:/mnt/extra-addons" $IMAGE \
+            odoo shell -d gmtest --log-level=warn < addons/.github/ci/smoke.py 2>&1 | tee smoke.log
+          grep -q "SMOKE OK" smoke.log
