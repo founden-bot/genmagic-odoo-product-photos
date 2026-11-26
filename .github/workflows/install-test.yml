@@ -27,9 +27,17 @@ jobs:
         run: |
           docker run --rm --network host $DB -v "$PWD/addons:/mnt/extra-addons" $IMAGE \
             odoo -d gmtest -i genmagic_product_photos --stop-after-init --without-demo=all --log-level=warn 2>&1 | tee install.log
-          if grep -E "ERROR|CRITICAL|Traceback" install.log; then exit 1; fi
+          if grep -E " (ERROR|CRITICAL) |Traceback" install.log; then
+            grep -E " (ERROR|CRITICAL) |Traceback|Error:|error:" -A3 install.log | head -40 | while IFS= read -r line; do echo "::error title=install::$line"; done
+            tail -15 install.log | while IFS= read -r line; do echo "::warning title=install-tail::$line"; done
+            exit 1
+          fi
       - name: Use it as a merchant does, GenMagic mocked
         run: |
           docker run --rm -i --network host $DB -v "$PWD/addons:/mnt/extra-addons" $IMAGE \
             odoo shell -d gmtest --log-level=warn < addons/.github/ci/smoke.py 2>&1 | tee smoke.log
-          grep -q "SMOKE OK" smoke.log
+          if ! grep -q "SMOKE OK" smoke.log; then
+            tail -30 smoke.log | while IFS= read -r line; do echo "::error title=smoke::$line"; done
+            exit 1
+          fi
+          grep "LIVE MODELS" smoke.log | while IFS= read -r line; do echo "::notice title=live::$line"; done
