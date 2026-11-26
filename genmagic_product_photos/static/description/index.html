@@ -1,0 +1,73 @@
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <div class="oe_span12">
+      <h2 class="oe_slogan">GenMagic AI Product Photos</h2>
+      <h3 class="oe_slogan">Make new product photos from the photo you already have, without leaving the product form.</h3>
+    </div>
+  </div>
+</section>
+
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <div class="oe_span12">
+      <h3>What it does</h3>
+      <p>
+        Open any product, press <b>GenMagic photos</b>, pick a style and make a new photo of that product from its
+        own main image. Keep the ones you like: each one is added to the product's extra media on your website, and
+        only if you tick the box is it used as the main image instead.
+      </p>
+      <ul>
+        <li><b>White studio</b>: clean white background and soft light.</li>
+        <li><b>Lifestyle scene</b>: the product in a real-life setting.</li>
+        <li><b>With a model</b>: a person using or wearing the product.</li>
+        <li><b>Flat lay</b>: top-down view with props.</li>
+        <li><b>Seasonal</b>: festive but uncluttered.</li>
+      </ul>
+      <p>
+        Every style asks the service to keep the product exactly as it is: same shape, colors, materials, label, logo
+        and proportions. You can add up to 300 characters of your own wishes, choose among the image models that work
+        from a photo, and see the cost of each photo and your balance left right after it is made.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <div class="oe_span12">
+      <h3>Needs the external GenMagic service</h3>
+      <p>
+        This app is free, and it works only together with the external GenMagic service (genmagic.co). The photos are
+        made by that service, not by Odoo. You pay GenMagic per photo from your own prepaid GenMagic balance, using your
+        own GenMagic API key. There is no Odoo billing and no activation key. Get a key at genmagic.co/get-api-key and
+        see prices at genmagic.co/pricing.
+      </p>
+      <h3>What data is sent, and when</h3>
+      <ul>
+        <li>Only when someone presses <b>Make photo</b>, the app sends the product's main image and the style text
+          (plus any extra wishes typed in) to genmagic.co, together with your API key to identify your account.</li>
+        <li>Nothing else is sent: no customer, order, price or other product data.</li>
+        <li>Nothing is sent until an administrator has ticked the consent box under
+          <b>Settings &gt; GenMagic</b>. Switch it off to stop all sending.</li>
+        <li>The new photo is downloaded only from GenMagic's own media addresses.</li>
+        <li>The API key is stored as a system parameter that only administrators can read.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <div class="oe_span12">
+      <h3>Set up in a minute</h3>
+      <ol>
+        <li>Install the app (it needs the Website / eCommerce app).</li>
+        <li>Open <b>Settings &gt; GenMagic</b>, tick the consent box and paste your GenMagic API key.</li>
+        <li>Open a product that has a main image and press <b>GenMagic photos</b>.</li>
+      </ol>
+      <p>Make sure your server can reach genmagic.co over HTTPS. The Python package <code>requests</code> is required.</p>
+      <h3>Support</h3>
+      <p>Questions or problems: <a href="mailto:hello@genmagic.co">hello@genmagic.co</a></p>
+    </div>
+  </div>
+</section>

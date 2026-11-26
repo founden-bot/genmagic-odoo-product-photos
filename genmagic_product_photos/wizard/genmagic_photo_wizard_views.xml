@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="genmagic_photo_wizard_form" model="ir.ui.view">
+        <field name="name">genmagic.photo.wizard.form</field>
+        <field name="model">genmagic.photo.wizard</field>
+        <field name="arch" type="xml">
+            <form string="GenMagic photos">
+                <div class="alert alert-warning" role="alert" invisible="not setup_problem">
+                    <field name="setup_problem"/>
+                </div>
+                <group>
+                    <group>
+                        <field name="product_tmpl_id"/>
+                        <field name="style" widget="radio"/>
+                    </group>
+                    <group>
+                        <field name="extra_wishes" placeholder="For example: on a wooden table, morning light"/>
+                        <field name="model_name"/>
+                    </group>
+                </group>
+                <div class="text-muted" invisible="result_image">
+                    Making a photo sends this product's main image and the style text to the GenMagic service
+                    and is paid from your GenMagic balance.
+                </div>
+                <group invisible="not result_image">
+                    <field name="result_image" widget="image" options="{'size': [512, 512]}" nolabel="1" colspan="2"/>
+                    <field name="cost_text" string="This photo cost" invisible="not cost_text"/>
+                    <field name="balance_text" string="Balance left" invisible="not balance_text"/>
+                    <field name="use_as_main" invisible="added"/>
+                    <div class="text-success" colspan="2" invisible="not added">
+                        Added to the product.
+                    </div>
+                </group>
+                <footer>
+                    <button string="Make photo" name="action_generate" type="object" class="btn-primary"
+                            invisible="result_image" data-hotkey="q"/>
+                    <button string="Make another" name="action_generate" type="object"
+                            invisible="not result_image" data-hotkey="q"/>
+                    <button string="Add to product photos" name="action_add" type="object" class="btn-primary"
+                            invisible="not result_image or added" data-hotkey="w"/>
+                    <button string="Close" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

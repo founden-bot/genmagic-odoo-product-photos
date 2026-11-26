@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_view_genmagic_photos" model="ir.ui.view">
+        <field name="name">product.template.form.genmagic.photos</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_open_genmagic_photos" type="object" class="oe_stat_button"
+                        icon="fa-magic" string="GenMagic photos" invisible="not id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
