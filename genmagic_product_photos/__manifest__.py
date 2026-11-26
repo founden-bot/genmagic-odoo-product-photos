@@ -1,0 +1,22 @@
+{
+    'name': 'GenMagic AI Product Photos',
+    'version': '19.0.1.0.0',
+    'category': 'Website/eCommerce',
+    'summary': 'Make new product photos from the product image, in the style you choose, and add them to the product media.',
+    'author': 'GenMagic',
+    'website': 'https://genmagic.co',
+    'support': 'hello@genmagic.co',
+    'license': 'LGPL-3',
+    'depends': ['website_sale'],
+    'external_dependencies': {'python': ['requests']},
+    'data': [
+        'security/ir.model.access.csv',
+        'views/res_config_settings_views.xml',
+        'wizard/genmagic_photo_wizard_views.xml',
+        'views/product_template_views.xml',
+    ],
+    'images': ['static/description/banner.png'],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}
